@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client-Server web app</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+    <script src="https://maps.google.com/maps/api/js?sensor=false"
+            type="text/javascript"></script>
+
+
+    <style>
+        .tab{
+            border: 1px solid black;
+            width:50%;
+        }
+        th,td{
+            border: 1px solid black;
+            width:50%;
+            text-align: left;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 10px;
+            padding: 10px
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<h3>Click to display a table</h3>
+
+<button id="button1">Click Me</button>
+
+<br/><br/>
+
+<table id="table1" ></table>
+
+<br></br>
+
+
+
+<script type="text/javascript">
+
+    var th,tr,td1,td2;
+    $(document).ready(function(){
+        $("#button1").click(function () {
+            th = "<tr><th>ID</th><th>FirstName</th><th>LastName</th></tr>";
+            $("#table1").append(th);
+
+
+            setInterval(function () {
+                $.get("/getItems", function (obj, status) {
+
+                       for (var i = 0; i <1; i++) {
+                     tr = "<tr>";
+                     td1 = "<td>" + obj.id + "</td>";
+                     td2 = "<td>" + obj.fname + "</td>";
+                     td3 = "<td>" + obj.lname + "</td></tr>";
+
+                     $("#table1").append(tr + td1 + td2 + td3);
+
+                     }
+
+               /*     for(var i=0;i<1;i++)
+                    {
+                        tr="<tr>";
+                        td1="<td>"+obj[i]["id"]+"</td>";
+                        td2="<td>"+obj[i]["fname"]+"</td>";
+                        td3="<td>"+obj[i]["lname"]+"</td></tr>";
+
+                        $("#table1").append(tr+td1+td2+td3);
+
+                    }
+*/
+                    $("#table1").addClass('tab');
+                });
+
+
+            }, 500);
+
+        });
+
+    });
+
+
+
+
+
+</script>
+
+</body>
+</html>
