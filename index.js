@@ -49,6 +49,9 @@ app.get('/getItems', function (req, res) {
                    res.json(doc);
 
                }
+               else
+               {callback();
+               }
 
 
            });
