@@ -3,7 +3,7 @@ var app = express();
 
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-app.set('port', (5000));
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
