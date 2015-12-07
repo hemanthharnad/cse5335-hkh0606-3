@@ -18,7 +18,7 @@ var i=1;
 
 
 app.get('/getItems', function (req, res) {
-   if(i<151) {
+
        console.log(i);
        var url = "mongodb://harnad:harnad@ds063134.mongolab.com:63134/heroku_j1cdrsnp";
        /*  MongoClient.connect(url, function (err, db) {
@@ -57,7 +57,7 @@ app.get('/getItems', function (req, res) {
            });
 
        }
-   }
+  
 
 });
 
