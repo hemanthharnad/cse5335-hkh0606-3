@@ -37,59 +37,56 @@
 <button id="button1">Click Me</button>
 
 <br/><br/>
-
-<table id="table1" ></table>
-
+<div id="table-area">
+    <table id="table1" ></table>
+</div>
 <br></br>
-
 
 
 <script type="text/javascript">
 
     var th,tr,td1,td2;
     $(document).ready(function(){
-        $("#button1").click(function () {
+        $("#button1").click(function() {
+            var row_counter=0;
             th = "<tr><th>ID</th><th>FirstName</th><th>LastName</th></tr>";
             $("#table1").append(th);
-
-
             setInterval(function () {
-                $.get("/getItems", function (obj, status) {
+                $.get("/getItems", function update (obj, status) {
 
-                       for (var i = 0; i <1; i++) {
-                     tr = "<tr>";
-                     td1 = "<td>" + obj.id + "</td>";
-                     td2 = "<td>" + obj.fname + "</td>";
-                     td3 = "<td>" + obj.lname + "</td></tr>";
+                    for (var i = 0; i <1; i++) {
+                        row_counter = row_counter + 1;
+                        //if (row_counter < 20) {
+                        tr = "<tr>";
+                        td1 = "<td>" + obj.id + "</td>";
+                        td2 = "<td>" + obj.fname + "</td>";
+                        td3 = "<td>" + obj.lname + "</td></tr>";
 
-                     $("#table1").append(tr + td1 + td2 + td3);
-
-                     }
-
-               /*     for(var i=0;i<1;i++)
-                    {
-                        tr="<tr>";
-                        td1="<td>"+obj[i]["id"]+"</td>";
-                        td2="<td>"+obj[i]["fname"]+"</td>";
-                        td3="<td>"+obj[i]["lname"]+"</td></tr>";
-
-                        $("#table1").append(tr+td1+td2+td3);
+                        $("#table1").append(tr + td1 + td2 + td3);
+                        $('#table1').fadeOut(6000);
+                        $('#table1').fadeIn(3000);
+                        // }
+                        if(row_counter>=20){
+                            //row_counter=0;
+                            removeRows(obj);
+                        }
 
                     }
-*/
+
                     $("#table1").addClass('tab');
+                    function removeRows(obj)
+                    {
+                        //console.log("in callback"); // to confirm we have reached here
+                        $("table#table1 tr:nth-child(2)").remove();
+
+
+                    }
+                    // $('#table1') .animate({
+                    //  height: 'toggle'
                 });
-
-
-            }, 500);
-
+            },500);
         });
-
     });
-
-
-
-
 
 </script>
 
